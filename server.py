@@ -10,7 +10,7 @@ env = Environment(loader=FileSystemLoader("templates"))
 class HelloWorld(object):
 
     def index(self):
-        tmpl = env.get_template("index2.html")
+        tmpl = env.get_template("index.html")
         return tmpl.render()
     index.exposed = True
 
