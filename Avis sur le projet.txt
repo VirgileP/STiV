@@ -6,6 +6,13 @@ En point positif, je retiens que le projet était intéressant et représentait 
 
 Timothée de Guibert
 
-J'ai rencontré plusieurs difficultés sur ce projet. Je me sentais globalement dépassé sur les problématiques que nous avons rencontrées tout au long du projet. Une difficulté récurrente était de parvenir à trouver une solution dans un langage que je ne maîtrisais pas. Comprendre ce que nous souhaitions faire, estimer la faisabilité d'une solution et la retenir demande du temps. C'est là la plus grosse difficulté que nous avons rencontrée. Entre le projet Java et le mémoire, il nous a été particulièrement délicat de parvenir à synchroniser nos emplois du temps pour notre projet python. Fréquemment, nous avions l'impression d'être très proche d'une solution, sans toujours parvenir à concrétiser cette dernière. Pourtant, nous étions porté par le défi de créer une appli web, mais notre compréhension croissante des technologies employées pour y parvenir était trop souvent insuffisante. 
+J'ai rencontré plusieurs difficultés sur ce projet. Je me sentais globalement dépassé sur les problématiques que nous avons
+rencontrées tout au long du projet. Une difficulté récurrente était de parvenir à trouver une solution dans un langage que je
+ne maîtrisais pas. Comprendre ce que nous souhaitions faire, estimer la faisabilité d'une solution et la retenir demande du
+temps. C'est là la plus grosse difficulté que nous avons rencontrée. Entre le projet Java et le mémoire, il nous a été
+particulièrement délicat de parvenir à synchroniser nos emplois du temps pour notre projet python. Fréquemment, nous avions
+l'impression d'être très proche d'une solution, sans toujours parvenir à concrétiser cette dernière. Pourtant, nous étions
+porté par le défi de créer une appli web, mais notre compréhension croissante des technologies employées pour y parvenir
+était trop souvent insuffisante. 
 
 
