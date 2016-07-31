@@ -3,8 +3,6 @@ import oauth2
 import requests
 import pymysql
 from lxml import etree
-
-
 from jinja2 import Environment, FileSystemLoader
 
 env = Environment(loader=FileSystemLoader("templates"))
@@ -57,12 +55,12 @@ class HelloWorld(object):
         signed_url = oauth_request.to_url()
 
         resp = requests.get(url=signed_url)
-        Paris_restaurants = resp.json()
+        Points_interets = resp.json()
 
         id = 1
         chaine = []
 
-        for business in Paris_restaurants['businesses']:
+        for business in Points_interets['businesses']:
             i = str(id)
             name = business['name']
             n = str(name)
@@ -108,51 +106,51 @@ class HelloWorld(object):
         return tmpl.render()
     ajout.exposed = True
 
+    def api_bdd(self, categorie, ville):
+        consumer_key    = 'eYaJtTiUJlSKpOgIrMDwrg'
+        consumer_secret = 'Fv0JTznlgg9ulRgf_YFjoJ4q2VU'
+        token           = 'Ah4uL-IH2Lf6vGpUORnmlqcOacTEHLP4'
+        token_secret    = 'swK6ERX4OyKDRIvo_EbGK45JSZ0'
 
-
-
-
-
-consumer_key    = 'eYaJtTiUJlSKpOgIrMDwrg'
-consumer_secret = 'Fv0JTznlgg9ulRgf_YFjoJ4q2VU'
-token           = 'Ah4uL-IH2Lf6vGpUORnmlqcOacTEHLP4'
-token_secret    = 'swK6ERX4OyKDRIvo_EbGK45JSZ0'
-
-db = pymysql.connect (host='localhost',
+        db = pymysql.connect (host='localhost',
                       user='root',
                       password='',
                       database='stiv')
-cur = db.cursor()
+        cur = db.cursor()
 
-consumer = oauth2.Consumer(consumer_key, consumer_secret)
+        consumer = oauth2.Consumer(consumer_key, consumer_secret)
 
-category_filter = 'shopping'
-location = 'Marseille'
-options =  'category_filter=%s&location=%s&sort=1' % (category_filter, location)
-url = 'http://api.yelp.com/v2/search?' + options
+        category_filter = categorie
+        catego = str(category_filter)
+        location = ville
+        options =  'category_filter=%s&location=%s&sort=1' % (category_filter, location)
+        url = 'http://api.yelp.com/v2/search?' + options
 
-oauth_request = oauth2.Request('GET', url, {})
-oauth_request.update({'oauth_nonce'      : oauth2.generate_nonce(),
+        oauth_request = oauth2.Request('GET', url, {})
+        oauth_request.update({'oauth_nonce'      : oauth2.generate_nonce(),
                       'oauth_timestamp'  : oauth2.generate_timestamp(),
                       'oauth_token'       : token,
                       'oauth_consumer_key': consumer_key})
 
-token = oauth2.Token(token, token_secret)
-oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
-signed_url = oauth_request.to_url()
+        token = oauth2.Token(token, token_secret)
+        oauth_request.sign_request(oauth2.SignatureMethod_HMAC_SHA1(), consumer, token)
+        signed_url = oauth_request.to_url()
 
-resp = requests.get(url=signed_url)
-Paris_restaurants = resp.json()
+        resp = requests.get(url=signed_url)
+        Points_interets = resp.json()
 
-for business in Paris_restaurants['businesses']:
-    name = business['name']
-    print(name)
 
-    cur.execute('INSERT INTO test(id, rating, name, review_count, latitude, longitude, city) VALUES (NULL, {}, "{}", {}, {}, {}, "{}")'.format(business['rating'], business['name'], business['review_count'], business['location']['coordinate']['latitude'], business['location']['coordinate']['longitude'], business['location']['city']))
-    db.commit()
-    cur.execute("UPDATE test SET category='"+category_filter+"' WHERE latitude = {}".format(business['location']['coordinate']['latitude']))
-    db.commit()
-    print ('{} - {} - {} ({}) -- latitude: {} - longitude {}'.format(business['rating'], business['name'], business['categories'], business['review_count'], business['location']['coordinate']['latitude'], business['location']['coordinate']['longitude']))
+        for business in Points_interets['businesses']:
 
+            cur.execute('INSERT INTO test(id, rating, name, review_count, latitude, longitude, city) VALUES (NULL, {}, "{}", {}, {}, {}, "{}")'.format(business['rating'], business['name'], business['review_count'], business['location']['coordinate']['latitude'], business['location']['coordinate']['longitude'], business['location']['city']))
+            db.commit()
+            cur.execute("UPDATE test SET category='"+catego+"' WHERE latitude = {}".format(business['location']['coordinate']['latitude']))
+            db.commit()
+            
+
+HelloWorld.api_bdd(HelloWorld(),'restaurants','Paris, FR')
+HelloWorld.api_bdd(HelloWorld(),'shopping','Paris, FR')
+HelloWorld.api_bdd(HelloWorld(),'restaurants','Marseille, FR')
+HelloWorld.api_bdd(HelloWorld(),'shopping','Marseille, FR')
 cherrypy.quickstart(HelloWorld(), config='server.conf')
 
