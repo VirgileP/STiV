@@ -29,4 +29,4 @@ mais je ne me sens pas suffisamment à l'aise avec Python. Enfin, sans chercher 
 jointes en Java, pour le mémoire. Avoir des projets en simultanée freine notre capacité à rendre des produits de qualité. 
 Enfin, nous avons obtenu notre connexion à l'API de Yelp tardivement, vers la fin des cours et les partiels. De ce fait, nos
 questions techniques sont arrivées tardivement et nous nous sommes retrouvés seuls face à des problèmes d'intégration de 
-plusieurs technologies (Ajax, Json, php). 
+plusieurs technologies (Ajax, Json, Php, Python). 
