@@ -4,7 +4,7 @@ J'ai trouvé la difficulté du projet élevée par rapport à notre niveau.
 La complexité du projet venait de l'implémentation de différents langages impliqués, que nous ne maîtrisons pas réellement. 
 En point positif, je retiens que le projet était intéressant et représentait un certain challenge. 
 
-Timothée de Guibert
+Timothée de Guibert.
 
 J'ai rencontré plusieurs difficultés sur ce projet. Je me sentais globalement dépassé sur les problématiques que nous avons
 rencontrées tout au long du projet. Une difficulté récurrente était de parvenir à trouver une solution dans un langage que je
@@ -15,4 +15,18 @@ l'impression d'être très proche d'une solution, sans toujours parvenir à conc
 porté par le défi de créer une appli web, mais notre compréhension croissante des technologies employées pour y parvenir
 était trop souvent insuffisante. 
 
+Virgile Perton. 
 
+J'étais très motivé par le projet, par sa nature. La partie de gestion de projet avec la soutenance fin avril était très 
+utile. Cependant, nous n'avions pas de réelle visibilité sur notre projet Python. En fin de projet, j'ai le sentiment d'avoir
+des bases en Python, mais je n'ai pas de compréhension globale des technologies que nous avons employés. J'ai eu des 
+diffcultés avec CherryPy, et j'avais des difficultés à trouver des informations pertinentes dans la documentation existante 
+le web. 
+
+Notre choix s'est tourné vers le php car nous trouvions plus de documentation sur ce langage. Hélas, nous n'avons pas réussi 
+atteindre nos objectifs dans le temps qui nous était imparti. Certes, nous avons développés des bribes de notre application 
+mais je ne me sens pas suffisamment à l'aise avec Python. Enfin, sans chercher à reporter la faute, nous avions des échéances
+jointes en Java, pour le mémoire. Avoir des projets en simultanée freine notre capacité à rendre des produits de qualité. 
+Enfin, nous avons obtenu notre connexion à l'API de Yelp tardivement, vers la fin des cours et les partiels. De ce fait, nos
+questions techniques sont arrivées tardivement et nous nous sommes retrouvés seuls face à des problèmes d'intégration de 
+plusieurs technologies (Ajax, Json, php). 
