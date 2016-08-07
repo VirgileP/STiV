@@ -2,33 +2,32 @@ import cherrypy
 import oauth2
 import requests
 import pymysql
+import subprocess
 from lxml import etree
 from jinja2 import Environment, FileSystemLoader
 
 env = Environment(loader=FileSystemLoader("templates"))
 
 class HelloWorld(object):
-
+    
+    #affichage de la page d'accueil HTML
     def index(self):
         tmpl = env.get_template("index.html")
         return tmpl.render()
     index.exposed = True
-
+    
+    "Chargement depuis index.html des critères de recherche
     def php_tmpl(self, **param):
         tmpl = env.get_template("index-test.php")
         return tmpl.render()
     php_tmpl.exposed = True
 
-    def mapajax_tmpl(self):
-        tmpl = env.get_template("templates/mapajax.php")
-        return tmpl.render()
-    index.exposed = True
-
     def xml(self):
         tmpl = env.get_template("xml.html")
         return tmpl.render()
     xml.exposed = True
-
+    
+    #Fonction pour la génération du fichier XML
     def ajout(self, ville, categorie):
         consumer_key    = 'eYaJtTiUJlSKpOgIrMDwrg'
         consumer_secret = 'Fv0JTznlgg9ulRgf_YFjoJ4q2VU'
@@ -59,7 +58,8 @@ class HelloWorld(object):
 
         id = 1
         chaine = []
-
+        
+        #Récupréation des informations recherchées depuis l'API
         for business in Points_interets['businesses']:
             i = str(id)
             name = business['name']
@@ -82,7 +82,8 @@ class HelloWorld(object):
         businessesd = etree.Element("businesses")
 
         buinesses_data = chaine
-
+        
+        #Création de l'arborescence XML
         for buiness_data in buinesses_data:
             busi = etree.SubElement(businessesd, "businesses")
             busi.set("data-id", buiness_data[0])
@@ -111,7 +112,8 @@ class HelloWorld(object):
         consumer_secret = 'Fv0JTznlgg9ulRgf_YFjoJ4q2VU'
         token           = 'Ah4uL-IH2Lf6vGpUORnmlqcOacTEHLP4'
         token_secret    = 'swK6ERX4OyKDRIvo_EbGK45JSZ0'
-
+        
+        #Connexion à la base de données
         db = pymysql.connect (host='localhost',
                       user='root',
                       password='',
@@ -139,7 +141,7 @@ class HelloWorld(object):
         resp = requests.get(url=signed_url)
         Points_interets = resp.json()
 
-
+        #Insertion des donées dans la base de donées
         for business in Points_interets['businesses']:
 
             cur.execute('INSERT INTO test(id, rating, name, review_count, latitude, longitude, city) VALUES (NULL, {}, "{}", {}, {}, {}, "{}")'.format(business['rating'], business['name'], business['review_count'], business['location']['coordinate']['latitude'], business['location']['coordinate']['longitude'], business['location']['city']))
@@ -148,9 +150,11 @@ class HelloWorld(object):
             db.commit()
             
 
+#Chargement des données dans la BDD
 HelloWorld.api_bdd(HelloWorld(),'restaurants','Paris, FR')
 HelloWorld.api_bdd(HelloWorld(),'shopping','Paris, FR')
 HelloWorld.api_bdd(HelloWorld(),'restaurants','Marseille, FR')
 HelloWorld.api_bdd(HelloWorld(),'shopping','Marseille, FR')
+#Lancement Cherrypy
 cherrypy.quickstart(HelloWorld(), config='server.conf')
 
